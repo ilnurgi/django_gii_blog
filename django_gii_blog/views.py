@@ -1,6 +1,15 @@
-from django.shortcuts import render, HttpResponse
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
-# Create your views here.
+from django_gii_blog.models import Post
 
-def index(request):
-    return HttpResponse('My blog')
+
+class PostsListView(ListView):
+    model = Post
+    paginate_by = 10
+    template_name = 'post_list.html'
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post.html'

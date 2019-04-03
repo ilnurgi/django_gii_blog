@@ -1,7 +1,8 @@
-from django.urls import path, include
+from django.urls import path
 
-from django_gii_blog.views import index
+from django_gii_blog.views import PostsListView, PostDetailView
 
 urlpatterns = [
-    path('', index)
+    path('<int:pk>', PostDetailView.as_view(), name='post-item'),
+    path('', PostsListView.as_view(), name='post-list'),
 ]
