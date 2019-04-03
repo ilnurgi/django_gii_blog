@@ -7,9 +7,7 @@ from django_gii_blog.models import Post
 class PostsListView(ListView):
     model = Post
     paginate_by = 10
-    template_name = 'templates/post_list.html'
 
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'templates/post.html'
