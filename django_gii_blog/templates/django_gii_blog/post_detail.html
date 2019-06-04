@@ -3,6 +3,6 @@
 {% block content %}
     <article>
         <h2><a href="{{ object.id }}">{{ object.title }}</a></h2>
-        {{ object.text }}
+        {{ object.text | safe }}
     </article>
 {% endblock %}

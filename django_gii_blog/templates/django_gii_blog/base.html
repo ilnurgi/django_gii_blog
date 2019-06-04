@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,9 +7,38 @@
     {% block title %}
         <title>Блог ilnurgi</title>
     {% endblock %}
+
+    {% block css_links %}
+        <link rel="stylesheet" href="{% static "highlight.css" %}">
+    {% endblock %}
+
+    {% block styles %}
+    <style>
+        * {
+            font-family: Arial, monospace;
+        }
+        .header {
+            background-color: #f8f8f2;
+            padding: 10px;
+        }
+        a {
+            font-size: 1.5rem;
+        }
+        a:visited {
+            color: black;
+        }
+        article {
+            background-color: #f8f8f2;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+    {% endblock %}
 </head>
 <body>
-    <h1><a href="/blog/">Блог</a> <a href="/">Гайфутдинова Ильнура</a></h1>
+    <div class="header">
+        <a href="/">Гайфутдинов Ильнур</a> \ <a href="/blog/">Блог</a>
+    </div>
     {% block content %}
     {% endblock %}
 </body>

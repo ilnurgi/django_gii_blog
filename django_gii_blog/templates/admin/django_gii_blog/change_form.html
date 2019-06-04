@@ -1,0 +1,46 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "highlight.css" %}">
+{% endblock %}
+
+
+{% block field_sets %}
+{{ block.super }}
+
+<div class="form-row">
+    <h1>markdown</h1>
+    <a href="https://daringfireball.net/projects/markdown/">оф страничка</a>
+    <div style="display: flex">
+        <ul>
+            <li># h1</li>
+            <li>###### h6</li>
+            <li>#наклонный текст# (em)</li>
+            <li>_наклонный текст_ (em)</li>
+            <li>**жирный текст** (strong)</li>
+            <li>__жирный текст__ (strong)</li>
+        </ul>
+        <ul>
+            <li>http://ilnurgi.ru</li>
+            <li>[ссылка с текстом](http://ilnurgi.ru title)</li>
+            <li>![alt-текст](http://ilnurgi.ru/meda/ilnurgi.png title)</li>
+            <li>>`кусок` кода</li>
+            <li>```блок кода```</li>
+        </ul>
+        <ul>
+            <li>* элемент списка</li>
+            <li>+ элемент списка</li>
+            <li>- элемент списка</li>
+            <li>* * * (hr)</li>
+            <li>--- (hr)</li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-row">
+    {{ original.text | safe }}
+</div>
+
+{% endblock %}
