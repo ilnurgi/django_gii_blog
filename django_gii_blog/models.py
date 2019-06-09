@@ -77,7 +77,7 @@ class Post(models.Model):
             if line.startswith(code_start):
                 is_code = True
                 _lexer = line[code_start_len:].strip()
-            elif line.endswith(code_end):
+            elif is_code and line.endswith(code_end):
                 is_code = False
                 code.append(line[:-code_end_len])
                 try:
