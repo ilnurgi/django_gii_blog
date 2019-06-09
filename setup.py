@@ -9,7 +9,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='django_gii_blog',
-    version='0.0.7',
+    version='0.0.8',
     author='Ильнур Гайфутдинов',
     author_email='ilnurgi87@gmail.com',
     description='Блог',
@@ -18,6 +18,9 @@ setuptools.setup(
     url='https://github.com/ilnurgi/django_gii_blog/',
     packages=setuptools.find_packages(),
     package_data={
-        'django_gii_blog': ['templates/**/*.html']
+        'django_gii_blog': [
+            'templates/admin/**/*.html',
+            'templates/django_gii_blog/**/*.html',
+        ]
     }
 )
