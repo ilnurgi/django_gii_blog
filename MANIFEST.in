@@ -3,3 +3,6 @@ include *.css
 
 recursive-include templates *.html
 recursive-include static *.css
+
+global-include *.html
+global-include *.html
