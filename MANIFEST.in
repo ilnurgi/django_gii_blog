@@ -6,3 +6,6 @@ recursive-include static *.css
 
 global-include *.html
 global-include *.html
+
+graft templates
+graft static
