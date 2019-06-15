@@ -1,3 +1,7 @@
+"""
+роутинг
+"""
+
 from django.urls import path
 
 from django_gii_blog.views import PostsListView, PostDetailView
