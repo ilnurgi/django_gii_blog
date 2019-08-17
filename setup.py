@@ -12,7 +12,7 @@ with open('requirements.txt') as fh:
 
 setuptools.setup(
     name='django_gii_blog',
-    version='0.0.19',
+    version='0.0.20',
     author='Ильнур Гайфутдинов',
     author_email='ilnurgi87@gmail.com',
     description='Блог',
