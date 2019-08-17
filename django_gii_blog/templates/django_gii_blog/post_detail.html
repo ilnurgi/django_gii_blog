@@ -4,5 +4,39 @@
     <article>
         <h2><a href="{{ object.id }}">{{ object.title }}</a></h2>
         {{ object.text | safe }}
+
+        <div class="comments">
+
+            <h2>Комментарии</h2>
+
+            {% if messages %}
+                <ul class="comment__messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="comment__message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="/blog/add_comment" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ object.id }}">
+                <div>
+                    <input name="user_name" placeholder="Имя" value="{{ user_name }}">
+                </div>
+                <div>
+                    <textarea name="comment" placeholder="Комментарии" rows="7" cols="80">{{ comment }}</textarea>
+                </div>
+                <input type="submit">
+            </form>
+
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment__author">{{ comment.user_name }}</div>
+                    <div class="comment__date">{{ comment.created }}, {{ comment.published }}</div>
+                    <div class="comment__text">{{ comment.comment }}</div>
+                </div>
+            {% endfor %}
+        </div>
     </article>
+
 {% endblock %}

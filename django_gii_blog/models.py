@@ -6,13 +6,10 @@ import os
 
 from time import time
 
+from django.contrib.auth.models import User
 from django.db import models
 
 from markdown import markdown
-
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters.html import HtmlFormatter
 
 
 class Post(models.Model):
@@ -35,71 +32,14 @@ class Post(models.Model):
         """
         return self.title
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+    def save(self, *args, **kwargs):
         """
         сохранение модели
-        :param force_insert:
-        :param force_update:
-        :param using:
-        :param update_fields:
-        :return:
         """
 
-        self.text = self.add_code_style(
-            markdown(self.text_raw)
-        )
+        self.text = markdown(self.text_raw, extensions=['codehilite'])
 
-        super(Post, self).save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields)
-
-    def add_code_style(self, content):
-        """
-        добавялем подсветку кода
-        :param content: текст от клиента
-        :type content: str
-        :rtype: text
-        """
-        code_start = '<p><code>'
-        code_end = '</code></p>'
-        code_start_len = len(code_start)
-        code_end_len = len(code_end)
-
-        is_code = False
-        _lexer = 'text'
-        code = []
-        result = []
-
-        for line in content.splitlines():
-            if line.startswith(code_start):
-                is_code = True
-                _lexer = line[code_start_len:].strip()
-            elif is_code and line.endswith(code_end):
-                is_code = False
-                code.append(line[:-code_end_len])
-                try:
-                    lexer = get_lexer_by_name(_lexer, stripall=True)
-                except ValueError:
-                    lexer = get_lexer_by_name('text', stripall=True)
-                formatter = HtmlFormatter()
-                result.append(
-                    highlight(
-                        '\n'.join(
-                            i.replace('&lt;', '<').replace('&gt;', '>')
-                            for i in code),
-                        lexer,
-                        formatter))
-                code = []
-                _lexer = 'text'
-            elif is_code:
-                code.append(line)
-            else:
-                result.append(line)
-
-        return '\n'.join(result)
+        super().save(*args, **kwargs)
 
 
 def upload_to(instance, filename):
@@ -141,3 +81,15 @@ class File(models.Model):
                 os.remove(self.field.file.name)
             except Exception as err:
                 pass
+
+
+class Comment(models.Model):
+    """
+    коментарии для поста
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user_name = models.CharField(max_length=100)
+    comment = models.TextField()
+    created = models.DateTimeField(auto_created=True, auto_now=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    published = models.NullBooleanField()

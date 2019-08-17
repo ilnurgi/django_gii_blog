@@ -3,8 +3,9 @@
 """
 
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
-from django_gii_blog.models import Post, File
+from django_gii_blog.models import Post, File, Comment
 
 
 class FilePostInline(admin.TabularInline):
@@ -12,8 +13,9 @@ class FilePostInline(admin.TabularInline):
     связанные с постом файлы
     """
     model = File
-    fields = ('field', 'url')
-    readonly_fields = ('url', )
+    fields = ('field', 'url', 'img')
+    readonly_fields = ('url', 'img')
+    extra = 1
 
     def url(self, instance):
         """
@@ -23,6 +25,17 @@ class FilePostInline(admin.TabularInline):
         """
         return instance.field.url
 
+    def img(self, instance):
+        return mark_safe('<img src="{}" height=100">'.format(instance.field.url))
+
+
+class CommentInline(admin.StackedInline):
+    """
+    связанные сообщения
+    """
+    model = Comment
+    extra = 1
+
 
 class PostAdmin(admin.ModelAdmin):
     """
@@ -31,8 +44,10 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = ('title', 'created', 'published')
     fields = (('title', 'created', 'published'), 'short_text', 'text_raw')
+    save_on_top = True
     inlines = [
         FilePostInline,
+        CommentInline,
     ]
 
 
@@ -44,3 +59,4 @@ class FileAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(File, FileAdmin)
+admin.site.register(Comment)
