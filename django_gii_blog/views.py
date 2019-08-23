@@ -3,6 +3,7 @@
 """
 
 from django.contrib import messages
+from django.core.mail import mail_admins
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic.list import ListView
@@ -23,7 +24,11 @@ class PostsListView(ListView):
         возвращает qs данных
         """
         qs = super().get_queryset()
-        return qs.filter(published=True)
+
+        if not self.request.user.is_superuser:
+            qs = qs.filter(published=True)
+
+        return qs.order_by('-created')
 
 
 class PostDetailView(DetailView):
@@ -61,6 +66,14 @@ def add_comment(request):
     if all((post_id, user_name, comment, post_id)):
         Comment(user=user, comment=comment, user_name=user_name, post_id=post_id).save()
         messages.add_message(request, messages.INFO, 'Комментарии добавлен, появится после модерации')
+        mail_admins(
+            'DJANGO_GII_BLOG',
+            'blog comment_add\n{post_id}\n{user_name}\n{comment}'.format(
+                post_id=post_id,
+                comment=comment,
+                user_name=user_name
+            )
+        )
     else:
         if not post_id:
             messages.add_message(request, messages.ERROR, 'Не задан идентификатор поста')

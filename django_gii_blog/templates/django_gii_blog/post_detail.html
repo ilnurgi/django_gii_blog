@@ -32,7 +32,12 @@
             {% for comment in comments %}
                 <div class="comment">
                     <div class="comment__author">{{ comment.user_name }}</div>
-                    <div class="comment__date">{{ comment.created }}, {{ comment.published }}</div>
+                    <div class="comment__date">
+                        {{ comment.created }}
+                        {% if request.user.is_superuser %}
+                            <span style="color:{% if comment.published %}green{% else%}red{% endif %};font-size: 1.3rem">{{ comment.published }}</span>
+                        {% endif %}
+                    </div>
                     <div class="comment__text">{{ comment.comment }}</div>
                 </div>
             {% endfor %}

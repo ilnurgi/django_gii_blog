@@ -18,11 +18,16 @@ class Post(models.Model):
     """
 
     title = models.CharField(max_length=255)
+
     created = models.DateField(auto_created=True)
     updated = models.DateField(auto_now=True)
-    text = models.TextField(blank=True)
+
     text_raw = models.TextField()
-    short_text = models.TextField()
+    text = models.TextField(blank=True)
+
+    short_text_raw = models.TextField()
+    short_text = models.TextField(blank=True)
+
     published = models.BooleanField(default=False)
 
     def __str__(self):
@@ -36,7 +41,7 @@ class Post(models.Model):
         """
         сохранение модели
         """
-
+        self.short_text = markdown(self.short_text_raw, extensions=['codehilite'])
         self.text = markdown(self.text_raw, extensions=['codehilite'])
 
         super().save(*args, **kwargs)

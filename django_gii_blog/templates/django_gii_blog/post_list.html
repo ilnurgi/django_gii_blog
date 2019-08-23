@@ -4,8 +4,13 @@
     {% for post in post_list %}
         <article>
             <h2><a href="{{ post.id }}">{{ post.title }}</a></h2>
-            <h5>{{ post.created }}</h5>
-            {{ post.short_text }}
+            <h5>
+                {{ post.created }}
+                {% if request.user.is_superuser %}
+                    <span style="color:{% if post.published %}green{% else%}red{% endif %};font-size: 1.3rem">{{ post.published }}</span>
+                {% endif %}
+            </h5>
+            {{ post.short_text | safe }}
         </article>
     {% endfor %}
 {% endblock %}

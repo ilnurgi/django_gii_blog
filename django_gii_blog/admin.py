@@ -43,7 +43,7 @@ class PostAdmin(admin.ModelAdmin):
     """
 
     list_display = ('title', 'created', 'published')
-    fields = (('title', 'created', 'published'), 'short_text', 'text_raw')
+    fields = (('title', 'created', 'published'), 'short_text_raw', 'text_raw')
     save_on_top = True
     inlines = [
         FilePostInline,
