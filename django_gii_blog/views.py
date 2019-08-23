@@ -3,6 +3,7 @@
 """
 
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.mail import mail_admins
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -64,7 +65,11 @@ def add_comment(request):
     post_id = request.POST['post_id']
 
     if all((post_id, user_name, comment, post_id)):
-        Comment(user=user, comment=comment, user_name=user_name, post_id=post_id).save()
+        comment = Comment(comment=comment, user_name=user_name, post_id=post_id)
+        if isinstance(user, User):
+            comment.user = user
+        comment.save()
+
         messages.add_message(request, messages.INFO, 'Комментарии добавлен, появится после модерации')
         mail_admins(
             'DJANGO_GII_BLOG',
