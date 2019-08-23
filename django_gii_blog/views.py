@@ -44,7 +44,7 @@ class PostDetailView(DetailView):
 
         comments = Comment.objects.filter(post_id=post.id)
 
-        if not self.request.user:
+        if not self.request.user.is_authenticated:
             comments = comments.filter(published=True)
         else:
             user_name = self.request.user.username
@@ -66,7 +66,7 @@ def add_comment(request):
 
     if all((post_id, user_name, comment, post_id)):
         comment = Comment(comment=comment, user_name=user_name, post_id=post_id)
-        if isinstance(user, User):
+        if user.is_authenticated:
             comment.user = user
         comment.save()
 
