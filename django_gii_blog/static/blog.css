@@ -91,3 +91,17 @@
 .comment__message-error {
     color: red;
 }
+
+textarea {
+    min-width: 640px;
+}
+@media (max-width: 640px){
+    img {
+        width: 100%;
+    }
+
+    textarea {
+        min-width: 100%;
+    }
+}
+
