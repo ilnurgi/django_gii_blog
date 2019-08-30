@@ -53,7 +53,7 @@ def upload_to(instance, filename):
     """
     return os.path.join(
         'django_gii_blog',
-        '{0}_{1}{2}'.format(instance.post_id, int(time()), os.path.splitext(filename)[-1])
+        '{0}_{1}_{2}'.format(instance.post_id, int(time()), filename)
     )
 
 
