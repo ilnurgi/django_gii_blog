@@ -11,6 +11,8 @@ from django.db import models
 
 from markdown import markdown
 
+from django_gii_blog.helpers import cyrillic_to_latin
+
 
 class Post(models.Model):
     """
@@ -53,7 +55,7 @@ def upload_to(instance, filename):
     """
     return os.path.join(
         'django_gii_blog',
-        '{0}_{1}_{2}'.format(instance.post_id, int(time()), filename)
+        '{0}_{1}_{2}'.format(instance.post_id, int(time()), cyrillic_to_latin(filename))
     )
 
 
