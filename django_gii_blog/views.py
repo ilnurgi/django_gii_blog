@@ -60,9 +60,9 @@ def add_comment(request):
     добавляем коментарии к посту
     """
     user = request.user
-    user_name = request.user.username or request.POST['user_name']
-    comment = request.POST['comment'].strip()
-    post_id = request.POST['post_id']
+    user_name = request.user.username or request.POST.get('user_name')
+    comment = request.POST.get('comment', '').strip()
+    post_id = request.POST.get('post_id')
 
     if all((post_id, user_name, comment, post_id)):
         comment = Comment(comment=comment, user_name=user_name, post_id=post_id)
