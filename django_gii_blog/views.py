@@ -59,12 +59,16 @@ def add_comment(request):
     """
     добавляем коментарии к посту
     """
+    post_id = request.POST.get('post_id')
+
+    if not post_id:
+        return redirect(reverse('blog:post-list'))
+
     user = request.user
     user_name = request.user.username or request.POST.get('user_name')
     comment = request.POST.get('comment', '').strip()
-    post_id = request.POST.get('post_id')
 
-    if all((post_id, user_name, comment, post_id)):
+    if user_name and comment:
         comment = Comment(comment=comment, user_name=user_name, post_id=post_id)
         if user.is_authenticated:
             comment.user = user
@@ -80,9 +84,6 @@ def add_comment(request):
             )
         )
     else:
-        if not post_id:
-            messages.add_message(request, messages.ERROR, 'Не задан идентификатор поста')
-
         if not user_name:
             messages.add_message(request, messages.ERROR, 'Не задано имя')
 
