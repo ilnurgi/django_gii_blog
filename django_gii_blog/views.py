@@ -3,7 +3,6 @@
 """
 
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.core.mail import mail_admins
 from django.shortcuts import redirect
 from django.urls import reverse

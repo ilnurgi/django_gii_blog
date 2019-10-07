@@ -3,6 +3,7 @@
 """
 
 import os
+import re
 
 from time import time
 
@@ -10,6 +11,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from markdown import markdown
+from htmlmin import minify
 
 from django_gii_blog.helpers import cyrillic_to_latin
 
@@ -45,8 +47,19 @@ class Post(models.Model):
         """
         self.short_text = markdown(self.short_text_raw, extensions=['codehilite'])
         self.text = markdown(self.text_raw, extensions=['codehilite'])
+        self.text = self.process_tags(self.text)
+        self.text = minify(self.text)
 
         super().save(*args, **kwargs)
+
+    @staticmethod
+    def process_tags(text: str) -> text:
+        for pattern, repl in (
+                (r'<!(div)(\.)([-\w]+)', r'<\g<1> class="\g<3>">'),
+                (r'<!/(div)', r'</\g<1>>'),
+        ):
+            text = re.sub(pattern, repl, text)
+        return text
 
 
 def upload_to(instance, filename):

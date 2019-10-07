@@ -91,9 +91,17 @@
 .comment__message-error {
     color: red;
 }
-
+.flex-container {
+    display: flex;
+}
+.flex-item {
+    padding: 10px;
+}
 textarea {
     min-width: 640px;
+}
+a[href='#toctree'], a[href='#toctree']:visited {
+    color: silver;
 }
 @media (max-width: 640px){
     img {
