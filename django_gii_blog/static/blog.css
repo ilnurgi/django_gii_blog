@@ -100,6 +100,9 @@
 textarea {
     min-width: 640px;
 }
+a {
+    color: black;
+}
 a[href='#toctree'], a[href='#toctree']:visited {
     color: silver;
 }
