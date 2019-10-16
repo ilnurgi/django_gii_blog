@@ -93,6 +93,7 @@
 }
 .flex-container {
     display: flex;
+    flex-wrap: wrap;
 }
 .flex-item {
     padding: 10px;

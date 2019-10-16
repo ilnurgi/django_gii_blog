@@ -55,8 +55,8 @@ class Post(models.Model):
     @staticmethod
     def process_tags(text: str) -> text:
         for pattern, repl in (
-                (r'<!(div)(\.)([-\w]+)', r'<\g<1> class="\g<3>">'),
-                (r'<!/(div)', r'</\g<1>>'),
+                (r'<!(div|style)(\.)([-\w]+)', r'<\g<1> class="\g<3>">'),
+                (r'<!/(div|style)', r'</\g<1>>'),
         ):
             text = re.sub(pattern, repl, text)
         return text
