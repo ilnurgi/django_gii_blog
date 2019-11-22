@@ -56,6 +56,7 @@ class Post(models.Model):
     def process_tags(text: str) -> text:
         for pattern, repl in (
                 (r'<!(div|style|details|summary)(\.)([-\w]+)', r'<\g<1> class="\g<3>">'),
+                (r'<!(div|style|details|summary)', r'<\g<1>>'),
                 (r'<!/(div|style|details|summary)', r'</\g<1>>'),
         ):
             text = re.sub(pattern, repl, text)
