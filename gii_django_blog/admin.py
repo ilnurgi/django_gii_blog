@@ -5,7 +5,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from django_gii_blog.models import Post, File, Comment
+from gii_django_blog.models import Post, File, Comment
 
 
 class FilePostInline(admin.TabularInline):

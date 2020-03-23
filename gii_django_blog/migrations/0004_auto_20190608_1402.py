@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('django_gii_blog', '0003_post_text_raw'),
+        ('gii_django_blog', '0003_post_text_raw'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('field', models.FileField(upload_to='')),
                 ('created', models.DateTimeField(auto_now=True)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='django_gii_blog.Post')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='gii_django_blog.Post')),
             ],
         ),
     ]

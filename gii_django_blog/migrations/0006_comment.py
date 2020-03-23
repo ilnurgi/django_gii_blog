@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('django_gii_blog', '0005_auto_20190609_0900'),
+        ('gii_django_blog', '0005_auto_20190609_0900'),
     ]
 
     operations = [
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('user_name', models.CharField(max_length=100)),
                 ('comment', models.TextField()),
                 ('published', models.NullBooleanField()),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='django_gii_blog.Post')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='gii_django_blog.Post')),
                 ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

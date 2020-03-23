@@ -11,14 +11,14 @@ with open('requirements.txt') as fh:
     requirements = fh.read().splitlines()
 
 setuptools.setup(
-    name='django_gii_blog',
-    version='0.0.36',
+    name='gii_django_blog',
+    version='0.0.37',
     author='Ильнур Гайфутдинов',
     author_email='ilnurgi87@gmail.com',
     description='Блог',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/ilnurgi/django_gii_blog/',
+    url='https://github.com/ilnurgi/gii_django_blog/',
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=requirements,

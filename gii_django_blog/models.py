@@ -13,7 +13,7 @@ from django.db import models
 from markdown import markdown
 from htmlmin import minify
 
-from django_gii_blog.helpers import cyrillic_to_latin
+from gii_django_blog.helpers import cyrillic_to_latin
 
 
 class Post(models.Model):

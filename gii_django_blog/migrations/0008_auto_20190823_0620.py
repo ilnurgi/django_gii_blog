@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def fill_short_text_raw(apps, schema_editor):
-    Post = apps.get_model('django_gii_blog', 'Post')
+    Post = apps.get_model('gii_django_blog', 'Post')
 
     for post in Post.objects.all():
         post.short_text_raw = post.short_text
@@ -14,7 +14,7 @@ def fill_short_text_raw(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('django_gii_blog', '0007_auto_20190823_0620'),
+        ('gii_django_blog', '0007_auto_20190823_0620'),
     ]
 
     operations = [

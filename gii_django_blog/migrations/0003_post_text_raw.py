@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('django_gii_blog', '0002_post_published'),
+        ('gii_django_blog', '0002_post_published'),
     ]
 
     operations = [

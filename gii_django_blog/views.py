@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from django_gii_blog.models import Post, Comment
+from gii_django_blog.models import Post, Comment
 
 
 class PostsListView(ListView):

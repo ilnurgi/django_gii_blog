@@ -4,7 +4,7 @@
 
 from django.urls import path
 
-from django_gii_blog.views import PostsListView, PostDetailView, add_comment
+from gii_django_blog.views import PostsListView, PostDetailView, add_comment
 
 app_name = 'blog'
 urlpatterns = [
