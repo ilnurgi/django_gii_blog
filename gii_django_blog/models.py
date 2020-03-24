@@ -68,7 +68,7 @@ def upload_to(instance, filename):
     вычисляем путь загрузки файла
     """
     return os.path.join(
-        'django_gii_blog',
+        'gii_django_blog',
         '{0}_{1}_{2}'.format(instance.post_id, int(time()), cyrillic_to_latin(filename))
     )
 
