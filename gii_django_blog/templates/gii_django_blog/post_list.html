@@ -8,6 +8,7 @@
                 {{ post.created }}
                 {% if request.user.is_superuser %}
                     <span style="color:{% if post.published %}green{% else%}red{% endif %};font-size: 1.3rem">{{ post.published }}</span>
+                    <a href="/admin/gii_django_blog/post/{{ post.id }}/change/">edit</a>
                 {% endif %}
             </h5>
             {{ post.short_text | safe }}

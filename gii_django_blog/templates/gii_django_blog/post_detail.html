@@ -3,6 +3,12 @@
 {% block content %}
     <article>
         <h2><a href="{{ object.id }}">{{ object.title }}</a></h2>
+
+        {% if request.user.is_superuser %}
+            <span style="color:{% if post.published %}green{% else%}red{% endif %};font-size: 1.3rem">{{ object.published }}</span>
+            <a href="/admin/gii_django_blog/post/{{ object.id }}/change/">edit</a>
+        {% endif %}
+
         {{ object.text | safe }}
 
         <div class="comments">
